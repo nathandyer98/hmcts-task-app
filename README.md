@@ -14,15 +14,15 @@ Built with a backend API and a frontend interface for creating, viewing, updatin
 
 
 ## 📋 API Endpoints
-Method | Endpoint | Description
-POST | /tasks | Create a new task
-GET | /tasks/:id | Retrieve a task by ID
-GET | /tasks | Retrieve all tasks
-PATCH | /tasks/:id/status | Update the status of a task
-DELETE | /tasks/:id | Delete a task
+**Method | Endpoint | Description**
+- POST | /tasks | Create a new task
+- GET | /tasks/:id | Retrieve a task by ID
+- GET | /tasks | Retrieve all tasks
+- PATCH | /tasks/:id/status | Update the status of a task
+- DELETE | /tasks/:id | Delete a task
 
-📚 Technologies Used
-Backend: Node.js, Express.js, 
-Frontend: React.js 
-Database: MongoDB / Mongoose
-Styling: Tailwind CSS / DaisyUI 
+## 📚 Technologies Used
+- **Backend:** Node.js, Express.js, 
+- **Frontend:** React.js 
+- **Database:** MongoDB / Mongoose
+- **Styling:** Tailwind CSS / DaisyUI 
