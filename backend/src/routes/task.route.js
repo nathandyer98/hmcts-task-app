@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getTasks, getTask, createTask, updateTask, deleteTask } from "../controllers/task.controller.js";
+import { getTasks, getTask, createTask, updateTask, deleteTask, searchTasks } from "../controllers/task.controller.js";
 
 const router = express.Router();
 
@@ -23,6 +23,8 @@ const router = express.Router();
 router.get("/", getTasks);
 
 router.get("/:id", getTask);
+
+// router.get("/search", searchTasks);
 
 router.post("/", createTask);
 

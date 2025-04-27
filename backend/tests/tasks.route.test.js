@@ -87,19 +87,17 @@ describe('GET /api/tasks/:id', () => {
 //Test suit for creating a new task
 describe('POST /api/tasks', () => {
     it('should create a new task', async () => {
-        const response = await apiTestAgent.post('/api/tasks').send(task1Fixture);
+        const response = await apiTestAgent.post('/api/tasks').send({ title: 'Test Task' });
         expect(response.status).toBe(201);
         task1Object = response.body;
-        expect(task1Object.title).toEqual(task1Fixture.title);
-        expect(task1Object.description).toEqual(task1Fixture.description);
-        expect(task1Object.dueDate).toEqual(task1Fixture.dueDate.toISOString());
-        expect(task1Object.status).toEqual(task1Fixture.status);
+        expect(task1Object.title).toEqual("Test Task");
+        expect(task1Object.description).toEqual(undefined);
+        expect(task1Object.taskStatus).toEqual("To Do");
 
         const dbTask = await Task.findById(task1Object._id);
-        expect(dbTask.title).toEqual(task1Object.title);
-        expect(dbTask.description).toEqual(task1Object.description);
-        expect(dbTask.dueDate.toISOString()).toEqual(task1Object.dueDate);
-        expect(dbTask.status).toEqual(task1Object.status);
+        expect(dbTask.title).toEqual("Test Task");
+        expect(dbTask.description).toEqual(undefined);
+        expect(dbTask.taskStatus).toEqual("To Do");
     });
 
     it('should return 400 if title is missing', async () => {

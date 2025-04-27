@@ -3,7 +3,13 @@ import { NotFoundError } from '../errors/applicationErrors.js';
 
 export const getTasks = async ({ page, limit }) => {
     const tasks = await TaskRepository.getTasks(page, limit);
-    return tasks
+    const pageCount = Math.ceil(await TaskRepository.countTasks() / limit);
+
+    const toDoCount = tasks.filter(task => task.taskStatus === "To Do").length;
+    const inProgressCount = tasks.filter(task => task.taskStatus === "In Progress").length;
+    const completedCount = tasks.filter(task => task.taskStatus === "Complete").length;
+
+    return { tasks, pageCount, toDoCount, inProgressCount, completedCount }
 };
 
 export const getTask = async (id) => {
@@ -33,3 +39,8 @@ export const deleteTask = async (id) => {
     const task = await TaskRepository.deleteTask(id);
     return "Task deleted successfully."
 };
+
+// export const searchTasks = async (idQuery, { page, limit }) => {
+//     const task = await TaskRepository.findTaskByIdQuery(idQuery, page, limit);
+//     return task
+// };

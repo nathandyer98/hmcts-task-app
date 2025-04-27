@@ -1,12 +1,8 @@
 import mongoose from "mongoose";
 
-export const TaskStatusEnum = ["To Do", "In Progress", "Completed"];
+export const TaskStatusEnum = ["To Do", "In Progress", "Complete"];
 
 const taskSchema = new mongoose.Schema({
-    caseId: {
-        type: String,
-        unique: true,
-    },
     title: {
         type: String,
         required: true,

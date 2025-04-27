@@ -60,6 +60,37 @@ class TaskRepository {
         return Task.findByIdAndDelete(id).lean();
     }
 
+    /**
+     * Return the number of tasks in the database
+     * @returns {Promise<number>} - The number of tasks in the database.
+     */
+    async countTasks() {
+        return Task.countDocuments();
+    }
+
+    /**
+     * Retun the number of tasks with a specific status
+     * @param {string} status - The status of the task
+     * @returns {Promise<number>} - The number of tasks with the specified status.
+     */
+    async countTasksByStatus(status) {
+        return Task.countDocuments({ taskStatus: status });
+    }
+
+    /**
+     * Find task by ID query with pagination
+     * @param {string} taskIdQuery - The ID of the task
+     * @param {number} page - The page number
+     * @param {number} limit - The number of items per page
+     * @returns {Promise<object>} - A task object.
+     * Returns null if the task is not found.
+     */
+    async findTaskByIdQuery(taskIdQuery, page, limit) {
+        return Task.findById({ _id: { $regex: taskIdQuery, $options: "i" } })
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .sort({ createdAt: -1 }).lean();
+    }
 }
 
 export default new TaskRepository();
